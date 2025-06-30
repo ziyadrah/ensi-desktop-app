@@ -18,6 +18,7 @@ public class Moyenne {
 
     public Moyenne(String codeEleve, String codeFiliere, String niveau, double moyenne) {
         this(0, codeEleve, codeFiliere, niveau, moyenne);
+        // TODO fix id
     }
 
     public int getId() { return id; }

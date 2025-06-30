@@ -14,6 +14,7 @@ public class Filiere {
 
     public Filiere(String code, String designation) {
         this(0, code, designation);
+        // TODO: fix the id in this scope
     }
 
     public int getId() { return id; }

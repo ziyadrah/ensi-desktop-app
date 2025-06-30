@@ -6,22 +6,22 @@ public class Eleve {
     private String nom;
     private String prenom;
     private String niveau;
-    private String codeFil;
+    private String codeFiliere;
 
-    public Eleve(int id, String code, String nom, String prenom, String niveau, String codeFil) {
+    public Eleve(int id, String code, String nom, String prenom, String niveau, String codeFiliere) {
         this.id = id;
         this.code = code;
         this.nom = nom;
         this.prenom = prenom;
         this.niveau = niveau;
-        this.codeFil = codeFil;
+        this.codeFiliere = codeFiliere;
     }
 
-    public Eleve(String code, String nom, String prenom, String niveau, String codeFil) {
-        this(0, code, nom, prenom, niveau, codeFil);
+    public Eleve(String code, String nom, String prenom, String niveau, String codeFiliere) {
+        this(0, code, nom, prenom, niveau, codeFiliere);
+        // TODO fix id
     }
 
-    // Getters et Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getCode() { return code; }
@@ -32,6 +32,6 @@ public class Eleve {
     public void setPrenom(String prenom) { this.prenom = prenom; }
     public String getNiveau() { return niveau; }
     public void setNiveau(String niveau) { this.niveau = niveau; }
-    public String getCodeFil() { return codeFil; }
-    public void setCodeFil(String codeFil) { this.codeFil = codeFil; }
+    public String getCodeFiliere() { return codeFiliere; }
+    public void setCodeFiliere(String codeFiliere) { this.codeFiliere = codeFiliere; }
 }

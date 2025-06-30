@@ -14,7 +14,7 @@ public class NoteController {
     }
 
     public void ajouterNote(Note note) throws SQLException {
-        String sql = "INSERT INTO Notes(code_eleve, code_mat, note) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Notes(code_eleve, code_matiere, note) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, note.getCodeEleve());
             stmt.setString(2, note.getCodeMatiere());
@@ -33,7 +33,7 @@ public class NoteController {
                     Note note = new Note(
                             rs.getInt("id"),
                             rs.getString("code_eleve"),
-                            rs.getString("code_mat"),
+                            rs.getString("code_matiere"),
                             rs.getDouble("note")
                     );
                     notes.add(note);
@@ -44,7 +44,7 @@ public class NoteController {
     }
 
     public void supprimerNoteParMatiere(String codeEleve, String codeMatiere) throws SQLException {
-        String sql = "DELETE FROM Notes WHERE code_eleve = ? AND code_mat = ?";
+        String sql = "DELETE FROM Notes WHERE code_eleve = ? AND code_matiere = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, codeEleve);
             stmt.setString(2, codeMatiere);

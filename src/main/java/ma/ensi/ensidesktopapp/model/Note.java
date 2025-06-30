@@ -15,6 +15,7 @@ public class Note {
     }
 
     public Note(String codeEleve, String codeMatiere, double note) {
+        // TODO fix id
         this(0, codeEleve, codeMatiere, note);
     }
 

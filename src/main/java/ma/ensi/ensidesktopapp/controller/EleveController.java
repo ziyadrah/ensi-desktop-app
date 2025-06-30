@@ -7,21 +7,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentController {
+public class EleveController {
     private Connection conn;
 
-    public StudentController(Connection conn) {
+    public EleveController(Connection conn) {
         this.conn = conn;
     }
 
     public void ajouterEleve(Eleve eleve) throws SQLException {
-        String sql = "INSERT INTO Eleve(code, nom, prenom, niveau, code_fil) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Eleve(code, nom, prenom, niveau, code_filiere) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, eleve.getCode());
             stmt.setString(2, eleve.getNom());
             stmt.setString(3, eleve.getPrenom());
             stmt.setString(4, eleve.getNiveau());
-            stmt.setString(5, eleve.getCodeFil());
+            stmt.setString(5, eleve.getCodeFiliere());
             stmt.executeUpdate();
         }
     }
@@ -37,7 +37,7 @@ public class StudentController {
                         rs.getString("nom"),
                         rs.getString("prenom"),
                         rs.getString("niveau"),
-                        rs.getString("code_fil")
+                        rs.getString("code_filiere")
                 );
                 eleves.add(e);
             }
@@ -46,12 +46,12 @@ public class StudentController {
     }
 
     public void modifierEleve(Eleve eleve) throws SQLException {
-        String sql = "UPDATE Eleve SET nom = ?, prenom = ?, niveau = ?, code_fil = ? WHERE code = ?";
+        String sql = "UPDATE Eleve SET nom = ?, prenom = ?, niveau = ?, code_filiere = ? WHERE code = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, eleve.getNom());
             stmt.setString(2, eleve.getPrenom());
             stmt.setString(3, eleve.getNiveau());
-            stmt.setString(4, eleve.getCodeFil());
+            stmt.setString(4, eleve.getCodeFiliere());
             stmt.setString(5, eleve.getCode());
             stmt.executeUpdate();
         }
@@ -77,7 +77,7 @@ public class StudentController {
                             rs.getString("nom"),
                             rs.getString("prenom"),
                             rs.getString("niveau"),
-                            rs.getString("code_fil")
+                            rs.getString("code_filiere")
                     );
                 }
             }

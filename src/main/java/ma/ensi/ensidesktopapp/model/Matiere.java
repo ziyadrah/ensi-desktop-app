@@ -18,6 +18,7 @@ public class Matiere {
 
     public Matiere(String code, String designation, int volumeHoraire, String codeModule) {
         this(0, code, designation, volumeHoraire, codeModule);
+        // TODO fix id
     }
 
     public int getId() { return id; }

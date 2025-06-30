@@ -24,7 +24,7 @@ public class MatiereController {
                             rs.getInt("id"),
                             rs.getString("code"),
                             rs.getString("designation"),
-                            rs.getInt("VH"),
+                            rs.getInt("volume_horaire"),
                             rs.getString("code_module")
                     );
                     matieres.add(mat);
@@ -36,7 +36,7 @@ public class MatiereController {
 
     public List<Matiere> listerMatieresParFiliereEtNiveau(String codeFiliere, String niveau) throws SQLException {
         List<Matiere> matieres = new ArrayList<>();
-        String sql = "SELECT m.* FROM Matiere m JOIN Module mo ON m.code_module = mo.code WHERE mo.code_fil = ? AND mo.niveau = ?";
+        String sql = "SELECT m.* FROM Matiere m JOIN Module mo ON m.code_module = mo.code WHERE mo.code_filiere = ? AND mo.niveau = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, codeFiliere);
             stmt.setString(2, niveau);
@@ -46,7 +46,7 @@ public class MatiereController {
                             rs.getInt("id"),
                             rs.getString("code"),
                             rs.getString("designation"),
-                            rs.getInt("VH"),
+                            rs.getInt("volume_horaire"),
                             rs.getString("code_module")
                     );
                     matieres.add(mat);
