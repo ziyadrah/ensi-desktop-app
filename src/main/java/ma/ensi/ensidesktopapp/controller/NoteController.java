@@ -14,7 +14,7 @@ public class NoteController {
     }
 
     public void ajouterNote(Note note) throws SQLException {
-        String sql = "INSERT INTO Notes(code_eleve, code_matiere, note) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO notes(code_eleve, code_matiere, note) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, note.getCodeEleve());
             stmt.setString(2, note.getCodeMatiere());
@@ -25,7 +25,7 @@ public class NoteController {
 
     public List<Note> listerNotesParEleve(String codeEleve) throws SQLException {
         List<Note> notes = new ArrayList<>();
-        String sql = "SELECT * FROM Notes WHERE code_eleve = ?";
+        String sql = "SELECT * FROM notes WHERE code_eleve = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, codeEleve);
             try (ResultSet rs = stmt.executeQuery()) {

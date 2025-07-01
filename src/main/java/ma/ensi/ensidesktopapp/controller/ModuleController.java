@@ -15,7 +15,7 @@ public class ModuleController {
 
     public List<Module> listerModulesParFiliere(String codeFiliere) throws SQLException {
         List<Module> modules = new ArrayList<>();
-        String sql = "SELECT * FROM Module WHERE code_filiere = ?";
+        String sql = "SELECT * FROM module WHERE code_filiere = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, codeFiliere);
             try (ResultSet rs = stmt.executeQuery()) {
