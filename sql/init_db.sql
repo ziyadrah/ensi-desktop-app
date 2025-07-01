@@ -54,4 +54,4 @@ CREATE TABLE IF NOT EXISTS Users (
 );
 
 INSERT INTO Users (email, nom, prenom, password)
-VALUES ('benhdouba.ziyad@gmail.com', 'Benhdouba', 'Ziyad', '');
+VALUES ('benhdouba.ziyad@gmail.com', 'Benhdouba', 'Ziyad', 'dev');
