@@ -12,5 +12,6 @@ module ma.ensi.ensidesktopapp {
     requires java.sql;
 
     opens ma.ensi.ensidesktopapp to javafx.fxml;
+    opens ma.ensi.ensidesktopapp.controller to javafx.fxml;
     exports ma.ensi.ensidesktopapp;
 }
