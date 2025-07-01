@@ -2,86 +2,48 @@
 // (inchangé)
 package ma.ensi.ensidesktopapp.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
 import ma.ensi.ensidesktopapp.model.Eleve;
+import ma.ensi.ensidesktopapp.service.EleveService;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EleveController {
-    private Connection conn;
+    @FXML
+    private TextField txtCode, txtNom, txtPrenom;
+    @FXML private Spinner<Integer> spinnerNiveau;
+    @FXML private ComboBox<String> comboFiliere;
 
-    public EleveController(Connection conn) {
-        this.conn = conn;
-    }
+    private final EleveService studentService = new EleveService();
 
-    public void ajouterEleve(Eleve eleve) throws SQLException {
-        String sql = "INSERT INTO Eleve(code, nom, prenom, niveau, code_filiere) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, eleve.getCode());
-            stmt.setString(2, eleve.getNom());
-            stmt.setString(3, eleve.getPrenom());
-            stmt.setString(4, eleve.getNiveau());
-            stmt.setString(5, eleve.getCodeFiliere());
-            stmt.executeUpdate();
+    @FXML
+    public void handleAddEleve() {
+        try {
+            Eleve s = new Eleve();
+            s.setCode(txtCode.getText());
+            s.setNom(txtNom.getText());
+            s.setPrenom(txtPrenom.getText());
+            s.setNiveau(spinnerNiveau.getValue());
+            s.setCodeFiliere(1); // exemple simplifié
+
+            studentService.addEleve(s);
+            showInfo("Étudiant ajouté avec succès.");
+        } catch (Exception e) {
+            showError("Erreur : " + e.getMessage());
         }
     }
 
-    public List<Eleve> listerEleves() throws SQLException {
-        List<Eleve> eleves = new ArrayList<>();
-        String sql = "SELECT * FROM Eleve";
-        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                Eleve e = new Eleve(
-                        rs.getInt("id"),
-                        rs.getString("code"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("niveau"),
-                        rs.getString("code_filiere")
-                );
-                eleves.add(e);
-            }
-        }
-        return eleves;
+    private void showInfo(String msg) {
+        new Alert(Alert.AlertType.INFORMATION, msg).show();
     }
 
-    public void modifierEleve(Eleve eleve) throws SQLException {
-        String sql = "UPDATE Eleve SET nom = ?, prenom = ?, niveau = ?, code_filiere = ? WHERE code = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, eleve.getNom());
-            stmt.setString(2, eleve.getPrenom());
-            stmt.setString(3, eleve.getNiveau());
-            stmt.setString(4, eleve.getCodeFiliere());
-            stmt.setString(5, eleve.getCode());
-            stmt.executeUpdate();
-        }
-    }
-
-    public void supprimerEleve(String code) throws SQLException {
-        String sql = "DELETE FROM Eleve WHERE code = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, code);
-            stmt.executeUpdate();
-        }
-    }
-
-    public Eleve chercherEleveParCode(String code) throws SQLException {
-        String sql = "SELECT * FROM Eleve WHERE code = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, code);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new Eleve(
-                            rs.getInt("id"),
-                            rs.getString("code"),
-                            rs.getString("nom"),
-                            rs.getString("prenom"),
-                            rs.getString("niveau"),
-                            rs.getString("code_filiere")
-                    );
-                }
-            }
-        }
-        return null;
+    private void showError(String msg) {
+        new Alert(Alert.AlertType.ERROR, msg).show();
     }
 }
