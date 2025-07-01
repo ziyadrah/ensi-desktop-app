@@ -12,7 +12,7 @@ public class MoyenneController {
     }
 
     public void enregistrerMoyenne(Moyenne moyenne) throws SQLException {
-        String sql = "INSERT INTO Moyennes(code_eleve, code_filiere, niveau, moyenne) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO moyennes(code_eleve, code_filiere, niveau, moyenne) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, moyenne.getCodeEleve());
             stmt.setString(2, moyenne.getCodeFiliere());
@@ -23,7 +23,7 @@ public class MoyenneController {
     }
 
     public Moyenne getMoyenneParEleve(String codeEleve) throws SQLException {
-        String sql = "SELECT * FROM Moyennes WHERE code_eleve = ?";
+        String sql = "SELECT * FROM moyennes WHERE code_eleve = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, codeEleve);
             try (ResultSet rs = stmt.executeQuery()) {

@@ -15,7 +15,7 @@ public class MatiereController {
 
     public List<Matiere> listerMatieresParModule(String codeModule) throws SQLException {
         List<Matiere> matieres = new ArrayList<>();
-        String sql = "SELECT * FROM Matiere WHERE code_module = ?";
+        String sql = "SELECT * FROM matiere WHERE code_module = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, codeModule);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -36,7 +36,7 @@ public class MatiereController {
 
     public List<Matiere> listerMatieresParFiliereEtNiveau(String codeFiliere, String niveau) throws SQLException {
         List<Matiere> matieres = new ArrayList<>();
-        String sql = "SELECT m.* FROM Matiere m JOIN Module mo ON m.code_module = mo.code WHERE mo.code_filiere = ? AND mo.niveau = ?";
+        String sql = "SELECT m.* FROM matiere m JOIN Module mo ON m.code_module = mo.code WHERE mo.code_filiere = ? AND mo.niveau = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, codeFiliere);
             stmt.setString(2, niveau);

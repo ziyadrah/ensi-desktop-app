@@ -15,7 +15,7 @@ public class EleveController {
     }
 
     public void ajouterEleve(Eleve eleve) throws SQLException {
-        String sql = "INSERT INTO Eleve(code, nom, prenom, niveau, code_filiere) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO eleve(code, nom, prenom, niveau, code_filiere) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, eleve.getCode());
             stmt.setString(2, eleve.getNom());
@@ -28,7 +28,7 @@ public class EleveController {
 
     public List<Eleve> listerEleves() throws SQLException {
         List<Eleve> eleves = new ArrayList<>();
-        String sql = "SELECT * FROM Eleve";
+        String sql = "SELECT * FROM eleve";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Eleve e = new Eleve(
@@ -46,7 +46,7 @@ public class EleveController {
     }
 
     public void modifierEleve(Eleve eleve) throws SQLException {
-        String sql = "UPDATE Eleve SET nom = ?, prenom = ?, niveau = ?, code_filiere = ? WHERE code = ?";
+        String sql = "UPDATE eleve SET nom = ?, prenom = ?, niveau = ?, code_filiere = ? WHERE code = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, eleve.getNom());
             stmt.setString(2, eleve.getPrenom());
@@ -58,7 +58,7 @@ public class EleveController {
     }
 
     public void supprimerEleve(String code) throws SQLException {
-        String sql = "DELETE FROM Eleve WHERE code = ?";
+        String sql = "DELETE FROM eleve WHERE code = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, code);
             stmt.executeUpdate();
@@ -66,7 +66,7 @@ public class EleveController {
     }
 
     public Eleve chercherEleveParCode(String code) throws SQLException {
-        String sql = "SELECT * FROM Eleve WHERE code = ?";
+        String sql = "SELECT * FROM eleve WHERE code = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, code);
             try (ResultSet rs = stmt.executeQuery()) {
