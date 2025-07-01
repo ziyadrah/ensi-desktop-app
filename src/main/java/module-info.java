@@ -13,5 +13,6 @@ module ma.ensi.ensidesktopapp {
 
     opens ma.ensi.ensidesktopapp to javafx.fxml;
     opens ma.ensi.ensidesktopapp.controller to javafx.fxml;
+    opens ma.ensi.ensidesktopapp.model to javafx.base;
     exports ma.ensi.ensidesktopapp;
 }
