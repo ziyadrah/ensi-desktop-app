@@ -48,7 +48,6 @@ public class EleveDAO implements IEleveDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Eleve s = new Eleve(
-                        rs.getInt("id"),
                         rs.getString("code"),
                         rs.getString("nom"),
                         rs.getString("prenom"),

@@ -24,4 +24,8 @@ public class EleveService {
     public List<Eleve> getAllEleves() throws SQLException {
         return dao.getAll();
     }
+
+    public void deleteEleve(int id) throws Exception {
+        dao.delete(id);
+    }
 }
